@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "type": "forecast",
+    "temperature": "+20",
+    "description": "Ясно"
+  },
+  {
+    "id": 2,
+    "type": "forecast",
+    "temperature": "+18",
+    "description": "Пасмурно"
+  },
+  {
+    "id": 3,
+    "type": "forecast",
+    "temperature": "-15",
+    "description": "Снег"
+  },
+  {
+    "id": 4,
+    "type": "forecast",
+    "temperature": "+10",
+    "description": "Дождь"
+  },
+  {
+    "id": 5,
+    "type": "forecast",
+    "temperature": "+15",
+    "description": "Облачно с прояснениями"
+  }
+]

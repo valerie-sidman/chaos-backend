@@ -11,6 +11,8 @@ const recipes = JSON.parse(fs.readFileSync('./data/recipes.json'));
 const series = JSON.parse(fs.readFileSync('./data/series.json'));
 const weather = JSON.parse(fs.readFileSync('./data/weather.json'));
 
+const messagesPerPage = 10;
+
 const messages = [
   {
     id: 1,
@@ -102,9 +104,21 @@ const router = new Router();
 
 router.get('/api/messages', async (ctx, next) => {
   const { page } = ctx.request.query;
-  const reversePage = Math.ceil(messages.length / 10) - page + 1;
-  const offset = (reversePage * 10) - 10;
-  return response(ctx, messages.slice(offset, offset + 10));
+  const pageQuantity = Math.ceil(messages.length / messagesPerPage);
+
+  if ((pageQuantity <= 1 && page == 1) || !page) {
+    return response(ctx, messages);
+  } else if (pageQuantity <= 1 && page > 1) {
+    return response(ctx, []);
+  }
+  if (page == 1) {
+    return response(ctx, messages.slice(-10));
+  }
+  if (page == pageQuantity) {
+    return response(ctx, messages.slice(0, messagesPerPage * (page - 1) * -1));
+  }
+
+  return response(ctx, messages.slice(messagesPerPage * page * -1, messagesPerPage * (page - 1) * -1));
 });
 
 // добавление сообщения
